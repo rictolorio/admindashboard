@@ -1,4 +1,4 @@
-import React from 'react'
+import { React, useState } from 'react'
 import {
   BarChart3,
   Calendar,
@@ -88,6 +88,20 @@ const menuItems = [
 
 
 function Sidebar({collapsed, onToggle, currentPage, onPageChange}) {
+  
+  const [expandedItems, setExpandedItems] = useState(new Set(['analytics']))
+
+  const toggleExpanded = (itemid) => {
+    const newExpanded = new Set(expandedItems)
+    if (newExpanded. has(itemid)){
+      newExpanded.delete(itemid)      
+    }else{
+      newExpanded.add(itemid)
+    }
+    setExpandedItems(newExpanded)
+  }
+
+
   return (
     <div className={`${
       collapsed ? 'w-20' : 'w-72'
@@ -126,6 +140,13 @@ function Sidebar({collapsed, onToggle, currentPage, onPageChange}) {
                         ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/25"
                         : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/50"
                     }`}
+                    onClick = {()=>{
+                      if (item.submenu){
+                        toggleExpanded(item.id)
+                      }else{
+                        onPageChange(item.id)
+                      }
+                    }}
                 >
                   {/* Left section: Icon + Label + Badges */}
                   <div className="flex items-center space-x-3">
@@ -157,6 +178,15 @@ function Sidebar({collapsed, onToggle, currentPage, onPageChange}) {
                     />
                   )}
                 </button>
+
+                {/* Sub Mmenu */}
+                {!collapsed && item.submenu && expandedItems.has(item.id) && (
+                  <div className = 'ml-8 mt-2 space-y-1'>
+                    {item.submenu.map((subitem) => {
+                      return <button>{subitem.label}</button>
+                    })}
+                  </div>
+                )}
               </div>
             )
           })}
