@@ -151,6 +151,7 @@ function Sidebar({collapsed, onToggle, currentPage, onPageChange}) {
                   {/* Left section: Icon + Label + Badges */}
                   <div className="flex items-center space-x-3">
                     <item.icon className="w-5 h-5" />
+                   
                     {/* Conditional rendering */}
                     <>
                       {!collapsed && (
@@ -186,7 +187,7 @@ function Sidebar({collapsed, onToggle, currentPage, onPageChange}) {
                 {!collapsed && item.submenu && expandedItems.has(item.id) && (
                   <div className = 'ml-8 mt-2 space-y-1'>
                     {item.submenu.map((subitem) => {
-                      return <button className='w-full text-left p-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-lg transition-all  '>{subitem.label}</button>
+                      return <button className='w-full text-left p-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-lg transition-all'>{subitem.label}</button>
                     })}
                   </div>
                 )}
@@ -197,22 +198,26 @@ function Sidebar({collapsed, onToggle, currentPage, onPageChange}) {
         {/* 49:16 */}
 
         {/* User Profile */}
-        <div className='p-4 border-t border-slate-200/50 dark:border-slate-700/50'>
-          <div className='flex items-center space-x-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50'>
-            <img src="/src/assets/avatar1.png" alt="user" className='w-10 h-10 rounded-full ring-2 ring-blue-500 '/>
-              <div className='flex-1 min-w-0'>
-                <div className='flex-1 min-w-0'>
-                  <p className='text-sm font-medium text-slate-800 dark:text-white truncate '>Ric Tolorio</p>
-                  <p className='text-xs text-slate-500 dark:text-slate-400 truncate'>Administrator</p>
-
-                </div>
-
+        {!collapsed && (
+          <div className="p-4 border-t border-slate-200/50 dark:border-slate-700/50">
+            <div className="flex items-center space-x-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+              <img
+                src="/src/assets/avatar1.png"
+                alt="user"
+                className="w-10 h-10 rounded-full ring-2 ring-blue-500"
+              />
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-slate-800 dark:text-white truncate">
+                  Ric Tolorio
+                </p>
+                <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
+                  Administrator
+                </p>
               </div>
-        
-
+            </div>
           </div>
+        )}
 
-        </div>
 
     </div>
   )
