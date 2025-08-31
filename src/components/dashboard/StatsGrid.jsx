@@ -38,9 +38,9 @@ const stats = [
         change: '-2.1%',
         trend: 'down',
         icon: Eye,
-        color: 'from-emerald-400 to-teal-600',
-        bgcolor: 'bg-emerald-50 dark:bg-emerald-900/20',
-        textColor: 'text-emerald-600 dark:text-emerald-400'
+        color: 'from-orange-500 to-red-600',
+        bgcolor: 'bg-orange-50 dark:bg-orange-900/20',
+        textColor: 'text-orange-600 dark:text-orange-400'
     }
 ]
 
@@ -73,20 +73,19 @@ function StatsGrid() {
                         </span>
                     </div>
                 </div>
-                <div className={'p-3 rounded-xl group-hover:scale-110 tranition-all duration-200'}>
+                <div className={`p-3 rounded-xl ${stats.bgcolor} group-hover:scale-110 tranition-all duration-300`}>
 
-                {/* ProgressBar */}
-                <div className='mt-4 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden'>
-                    <div className={'w-full bg-gradient-to-r rounded-full transition-all duration-100'}>
-                    </div>
-                </div>
-
+                    {<stats.icon className={`w-6 h-6 ${stats.textColor}`}/> }
                 </div>
             </div>
-            
-            {/* 1:00 */}
-            
+
+            {/* ProgressBar */}
+            <div className='mt-4 h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden'>
+                <div className={`h-full bg-gradient-to-r ${stats.color} rounded-full transition-all duration-100`} style ={{width: stats.trend === 'up' ? '75%' : '45%'}}>
+                </div>
+            </div>            
         </div>
+
        )
        })}
     </div>
