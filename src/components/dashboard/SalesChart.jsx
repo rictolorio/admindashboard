@@ -51,9 +51,10 @@ function SalesChart() {
                 <div className='w-3 h-3 rounded-full' style={{backgroundColor: item.color}} />
                   <span className='text-sm text-late-600 dark:text-slate-400'>
                     {item.name}
-                  </span>
-
-               
+                  </span>               
+              </div>
+              <div className='text-sm font-semibold text-slate-800 dark:text-white'>
+                {item.value}% 
               </div>
             </div>
           )
