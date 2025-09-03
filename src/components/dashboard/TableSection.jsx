@@ -115,40 +115,45 @@ function TableSection() {
                 </thead>
                     
                 <tbody>
-                    {recentOrders.map((order, index)=> {
-                        return (
-                            <tr className='border-b border-slate-200/50 dark:border-slate-700/50 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors'>
-                        <td className='p-4' key={index}> <span className='text-sm font-medium text-blue-500'> {order.id} </span> 
-                        </td> 
-
-                        <td className='p-4'>
-                            <span className='text-sm text-slate-800 dark:text-white'>{order.customer} </span>
-                        </td> 
-
-                        <td className='p-4'>
-                            <span className='text-sm text-slate-800 dark:text-white'>{order.product}</span> 
+                {recentOrders.map((order, index) => {
+                    return (
+                    <tr
+                        key={order.id || index}   // ✅ must have key
+                    >
+                        <td className="p-4">
+                        <span className="text-sm font-medium text-blue-500">{order.id}</span>
                         </td>
-                        
-                        <td className='p-4'>
-                            <span className='text-sm text-slate-800 dark:text-white'>{order.amount} </span> 
+
+                        <td className="p-4">
+                        <span className="text-sm text-slate-800 dark:text-white">{order.customer}</span>
                         </td>
-                        
-                        <td className='p-4'>
-                            <span className={`font-medium text-xs px-3 py-1 rounded-full ${getStatusColor(order.status)}`}>
+
+                        <td className="p-4">
+                        <span className="text-sm text-slate-800 dark:text-white">{order.product}</span>
+                        </td>
+
+                        <td className="p-4">
+                        <span className="text-sm text-slate-800 dark:text-white">{order.amount}</span>
+                        </td>
+
+                        <td className="p-4">
+                        <span
+                            className={`text-slate-400 dark:text-white font-medium text-xs px-3 py-1 rounded-full ${getStatusColor(
+                            order.status
+                            )}`}
+                        >
                             {order.status}
-                            </span>
-                        </td>       
+                        </span>
+                        </td>
 
-                        <td className='p-4'>
-                            <span className='text-sm text-slate-800 dark:text-white'>{order.date} </span> 
-                        </td>                    
-                                    
-                        <td className='p-4'> 
-                            <span className='text-sm text-slate-800 dark:text-white'> <MoreHorizontal className='w-4 h-4'/> 
-                            </span> 
-                        </td> 
-                    </tr> 
-                    )})}
+                        <td className="p-4">
+                        <span className="text-sm text-slate-800 dark:text-white">
+                            <MoreHorizontal className="w-4 h-4" />
+                        </span>
+                        </td>
+                    </tr>
+                    )
+                })}
                 </tbody>                 
             </table>
         </div>   
@@ -164,7 +169,7 @@ function TableSection() {
                     Best performing products
                 </p>                
             </div>
-            <button className='text=blue-600 hover:text-blue-700 text-sm font-medium'>
+            <button className='text=blue-600 hover:text-blue-700 text-sm font-medium dark:text-slate-100/50 dark:hover:text-slate-600/50'>
              View all   
             </button>           
         </div>
@@ -176,15 +181,15 @@ function TableSection() {
                     <div className='flex items-center justify-between p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/50 transitions-colors'>
                 <div className='flex-1'>
                     <h4 className='text-sm font-semibold text-slate-800 dark:text-white'>
-                        Product Name
+                        {product.name}
                     </h4>
-                    <p className='text-xs text-slate-500 dark:text-slate-400'>Product sales</p>
+                    <p className='text-xs text-slate-500 dark:text-slate-400'>{product.sales}</p>
                 </div>
                 <div className='text-right'>
-                    <p className='text-sm font-semigold text-slate-800 dark:text-white'>Product Revenue</p>
+                    <p className='text-sm font-semigold text-slate-800 dark:text-white'>{product.revenue}</p>
                     <div className='flex items-center space-x-1'>
-                        <TrendingUp w-3 h-3 text-emerald-500 />
-                        <span>Product Change</span>
+                        <TrendingUp className = 'w-3 h-3 text-emerald-500 dark:text-slate-50' />
+                        <span className={`text-xs font-medium ${product.trend === 'up' ? 'text-emerald-500' : 'text-red-500'} `}>{product.change}</span>
 
                     </div>
                 </div>
